@@ -1,30 +1,27 @@
 <template>
   <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
   </nav>
   <router-view/>
+  <link rel="stylesheet" href="https://unpkg.com/primeflex@^3/primeflex.css">
+  <link rel="stylesheet" href="https://unpkg.com/primeflex/themes/saga-blue.css">
+  <link rel="stylesheet" href="https://unpkg.com/primeflex/themes/arya-blue.css"/>;
+  <link rel="stylesheet" href="https://unpkg.com/primeflex/themes/vela-blue.css"/>;
 </template>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'AvenirNext', Helvetica, Arial, Verdana, Tahoma, sans-serif !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+  color: black;
 }
 
-nav {
-  padding: 30px;
+@font-face {
+    font-family: 'AvenirNext';
+    src: local('AvenirNext LT Pro Regular'), url('~@/assets/font/Tipografias/Avenir Next LT Pro/AvenirNextLTPro-Regular.otf') format('opentype');
 }
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
+@font-face {
+    font-family: 'AvenirNext Bold';
+    src: local('AvenirNext LT Pro Bold'), url('~@/assets/font/Tipografias/Avenir Next LT Pro/AvenirNextLTPro-Bold.otf') format('opentype');
 }
 </style>

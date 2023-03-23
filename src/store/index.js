@@ -1,14 +1,10 @@
-import { createStore } from 'vuex'
+import Vuex from 'vuex'
+import memesModule from '@/modules/memes'
 
-export default createStore({
-  state: {
-  },
-  getters: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
+export default new Vuex.Store({
+  strict: false,
+  state: {},
   modules: {
-  }
+    memesModule
+  },
 })
