@@ -4,8 +4,8 @@
   <router-view/>
   <link rel="stylesheet" href="https://unpkg.com/primeflex@^3/primeflex.css">
   <link rel="stylesheet" href="https://unpkg.com/primeflex/themes/saga-blue.css">
-  <link rel="stylesheet" href="https://unpkg.com/primeflex/themes/arya-blue.css"/>;
-  <link rel="stylesheet" href="https://unpkg.com/primeflex/themes/vela-blue.css"/>;
+  <link rel="stylesheet" href="https://unpkg.com/primeflex/themes/arya-blue.css"/>
+  <link rel="stylesheet" href="https://unpkg.com/primeflex/themes/vela-blue.css"/>
 </template>
 
 <style>

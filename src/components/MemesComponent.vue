@@ -1,83 +1,79 @@
 <template>
-  <div class="grid justify-content-center">
-    <div class="col-12 sm:col-10 md:col-10 lg:col-10 xl:col-10">
-      <div class="card flex align-items-center justify-content-center">
-        <Card style="width: 90em; box-shadow: 0px 3px 8px 5px darkred;">
-          <template #content>
-            <span class="p-input-icon-left">
-              <i class="pi pi-search" />
-              <InputText v-model="filters['global'].value" placeholder="Meme"/>
-            </span>
-            <DataTable class="rangosTable" v-model:filters="filters" :value="memesCatalogo" stripedRows  paginator :rows="3" dataKey="id"
-              :loading="loading" :globalFilterFields="['name', 'height', 'width', 'url']" tableStyle="min-width: 50rem">
-              <template #empty>
-                <div style="text-align: center;">
-                  Elemento no encontrado. 
-                </div>
-              </template>
-              <Column field="name" header="Nombre" style="width: 30rem; color:black">
-                <template #body="{ data }">
-                    {{ data.name }}
-                </template>
-              </Column>
-              <Column field="width" header="Ancho" style="width: 10rem; color:black"/>
-              <Column field="height" header="Alto" style="width: 10rem; color:black"/>
-              <Column header="Imagen" style="width: 20rem">
-                <template #body="{ data }">
-                  <Image :src="data.url" alt="Image" width="70" height="35" class="p-image-preview-container" preview />          
-                </template>
-              </Column>
-            </DataTable>
-          </template>
-        </Card>
+<div class="row mt-4 ml-5">
+  <div class="col-sm-12 col-md-4 col-lg-4">
+    <input class="form-control" v-model="filtros" @keyup="valor()" placeholder="Buscar Meme">
+  </div>
+</div>
+  <div class="row">
+  <div class="col-sm-12 col-md-3 col-lg-3 rangosTable ml-7 mt-5" v-for="(item, index) in filtrosCatalogos" :key="index">
+  <div class="row text-fuente">
+    <div class="col-md-4">
+      {{index+1}}
+      <img :src="item.url" class="img-fluid rounded-start" alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">{{item.name}}</h5>
+        <small class="text-subtitulo"> <strong>Ancho:</strong>{{item.width}}</small><br>
+        <small class="text-subtitulo"> <strong>Alto:</strong>{{item.height}}</small>
       </div>
     </div>
   </div>
+</div>
+</div>
 </template>
 <script>
 //importación de componentes a utilizar..
 import { mapActions, mapState, mapMutations } from 'vuex'
-import { FilterMatchMode, FilterOperator } from 'primevue/api';
-import DataTable from 'primevue/datatable';
-import Column from 'primevue/column';
-import InputText from 'primevue/inputtext';
-import Image from 'primevue/image'
-import Card from 'primevue/card';
-
 export default {
   name: 'MemesComponent',
-  components: {DataTable, Column, InputText, Image, Card},
   data: () => ({
-    filters: null,
+    filtros: undefined,
+    filtrosCatalogos:[]
   }),
 
   computed: {
     ...mapState('memesModule', ['memesCatalogo'])
   },
-  created() {
-        this.initFilters();
-    },
+
   async mounted () {
     await this.obtenerMemes();
+    this.filtrosCatalogos = this.memesCatalogo;
   },
 
   methods: {
     ...mapActions('memesModule', ['obtenerMemes']),
     ...mapMutations('memesModule', ['SetMemes']),
 
-    initFilters() {
-        this.filters = {
-          global: { value: null, matchMode: FilterMatchMode.CONTAINS },
-          name: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
-          height: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }] },
-        };
-    },
+    //Metodo de busqueda name, height y id..
+    valor(){
+      if(this.filtros !== undefined){
+        let resultado = this.memesCatalogo.filter(item => item.name == this.filtros ||
+                        item.height == this.filtros || item.id == this.filtros);
+        if(resultado.length > 0){
+          this.filtrosCatalogos = resultado;
+        } else {
+          this.filtrosCatalogos = this.memesCatalogo;
+        }
+      }
+    }
   }
 }
 </script>
 <style>
 .rangosTable{
-  margin-top: 15px;
+  background: orange;
+  box-shadow: 0px 3px 8px 5px rgb(29, 118, 153);
 }
 
+.text-fuente {
+  font-family: AvenirNext Bold;
+  font-size: 15px;
+  color: white;
+  margin-top: 5px;
+}
+.text-subtitulo {
+  font-size: 14px;
+  color: rgb(46, 38, 161);
+}
 </style>

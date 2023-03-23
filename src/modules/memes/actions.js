@@ -1,6 +1,7 @@
 import { ServiceFactory } from '@/services/ServiceFactory';
 const memes = ServiceFactory.get('memesService');
 
+//Iniciamos creación de la tienda..
 export async function obtenerMemes(context) {
     await memes.obtenerMemesService()
       .then(response => {

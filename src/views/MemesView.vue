@@ -1,10 +1,8 @@
 <template>
-  <div class="grid">
-    <div class="col-12">
-      <div class="spaces">
+  <div class="row spaces">
+    <div class="col-10">
       <h1 class="title">El Meme :D</h1>
       <memes-component></memes-component>
-  </div>
     </div>
   </div>
 </template>

@@ -7,4 +7,10 @@ import "primevue/resources/themes/lara-light-indigo/theme.css";
 import "primevue/resources/primevue.min.css";
 import "primeicons/primeicons.css";
 
-createApp(App).use(store).use(router).use(PrimeVue).mount('#app')
+import "bootstrap/dist/css/bootstrap.min.css"
+import "bootstrap"
+
+import VueSweetalert2 from 'vue-sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
+
+createApp(App).use(store).use(router).use(PrimeVue).use(VueSweetalert2).mount('#app')
